@@ -1,28 +1,26 @@
-import Link from 'next/link';
+'use client';
+
+import Link from "next/link";
+import { useCart } from "../context/CartContext";
 
 export default function Header() {
+  const { cartItems } = useCart();
+
   return (
-    <header className="border-b border-gray-200 bg-white text-black">
-      <div className="mx-auto flex max-w-7xl items-center justify-between p-4">
-        {/* Логотип */}
-        <Link href="/" className="text-2xl font-bold tracking-tight">
-          SHOP.
-        </Link>
+    <header className="w-full border-b border-gray-200 p-4 flex justify-between items-center max-w-7xl mx-auto">
+      <Link href="/" className="text-2xl font-black tracking-tighter">
+        SHOP.
+      </Link>
+      
+      <nav className="hidden md:flex gap-6 font-medium">
+        <Link href="/" className="hover:text-gray-500">Каталог</Link>
+        <Link href="#" className="hover:text-gray-500">Про нас</Link>
+      </nav>
 
-        {/* Навігація */}
-        <nav className="hidden md:flex gap-6 font-medium">
-          <Link href="/catalog" className="hover:text-blue-600 transition">Каталог</Link>
-          <Link href="/about" className="hover:text-blue-600 transition">Про нас</Link>
-        </nav>
-
-        {/* Кошик */}
-        <button className="flex items-center gap-2 rounded-full bg-black px-4 py-2 text-white hover:bg-gray-800 transition">
-          <span>Кошик</span>
-          <span className="flex h-6 w-6 items-center justify-center rounded-full bg-white text-xs font-bold text-black">
-            0
-          </span>
-        </button>
-      </div>
+      {/* Тепер це посилання, яке веде на сторінку /cart */}
+      <Link href="/cart" className="bg-black text-white px-5 py-2 rounded-full font-medium flex items-center gap-2 hover:bg-gray-800 transition">
+        Кошик <span className="bg-white text-black px-2 py-0.5 rounded-full text-sm">{cartItems.length}</span>
+      </Link>
     </header>
   );
 }
