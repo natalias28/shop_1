@@ -1,16 +1,22 @@
-'use client'; // Ця кнопка теж інтерактивна
+'use client';
 
-import { useCart } from "../context/CartContext";
+import { useCart } from '../context/CartContext';
 
-export default function AddToCartButton({ product }: { product: any }) {
+export default function AddToCartButton({
+  product,
+  size = 'M',
+}: {
+  product: any;
+  size?: string;
+}) {
   const { addToCart } = useCart();
 
   return (
-    <button 
-      onClick={() => addToCart(product)}
-      className="mt-auto w-full bg-black text-white py-2 rounded-lg hover:bg-gray-800 transition"
+    <button
+      onClick={() => addToCart(product, size, 1)}
+      className="w-full bg-black text-white py-2.5 text-xs font-bold uppercase tracking-widest hover:bg-zinc-800 transition cursor-pointer"
     >
-      Додати в кошик
+      Add to Bag
     </button>
   );
 }
